@@ -1,105 +1,143 @@
+/* ===== Responsive letter card (replacement for your current rules) ===== */
+
 #letterCard {
+    /* Center on screen reliably (no random offsets) */
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(1);
 
-    width: 95vw;               /* bigger on mobile */
-    max-width: 760px;          /* slightly larger on desktop */
-    aspect-ratio: 3 / 4.4;     /* better ratio for your letter */
+    /* Responsive width with a sensible max */
+    width: 92vw;
+    max-width: 760px;
 
-    padding: 10vw 6vw 14vw 6vw;
+    /* Use a flexible height rather than strict aspect-ratio for small screens */
+    min-height: 64vh;
+    max-height: 92vh;
 
+    /* Comfortable padding that scales */
+    padding: clamp(18px, 6vw, 56px) clamp(14px, 6vw, 36px) clamp(26px, 8vw, 72px) clamp(14px, 6vw, 36px);
+
+    /* Background images (keep texture + background image) */
     background-image:
         url("../letter_bg.jpg"),
         url("https://www.transparenttextures.com/patterns/paper-fibers.png");
     background-size: cover, auto;
-    background-position: center;
+    background-position: center top, left top; /* avoid "random" placement */
     background-repeat: no-repeat, repeat;
 
     border-radius: 12px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 
+    /* Keep hidden state to be controlled by your script;
+       if you want it visible by default, change opacity to 1 and pointer-events:auto */
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.45s ease, transform 0.45s ease;
 
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-@media (max-width: 480px) {
-    #letterCard {
-        width: 96vw;
-        padding: 12vw 7vw 16vw 7vw;
-        border-radius: 10px;
-    }
-
-    #letterCard h2 {
-        font-size: 6.5vw;
-    }
-
-    #letterText {
-        font-size: 4.4vw;
-        line-height: 6vw;
-    }
-}
-
+/* Title & signature */
 #letterCard h2 {
-    margin-top: 10px;
-    margin-bottom: 0;
+    margin: 6px 0 6px;
     font-family: "Playfair Display", serif;
     color: #9c3a3a;
-    font-size: 1rem;
+    font-size: clamp(18px, 4.5vw, 34px);
     text-align: center;
+    line-height: 1.05;
 }
 
 #letterCard::after {
     content: "— from someone";
     display: block;
-    margin-top: 24px;
-    font-size: 0.95rem;
+    margin-top: 12px;
+    font-size: clamp(12px, 2.6vw, 16px);
     text-align: right;
-    opacity: 0.7;
+    opacity: 0.8;
     font-style: italic;
+    padding-right: 2px;
 }
 
-
+/* Scroll wrapper fills remaining space so the text can scroll if needed */
 #letterScrollWrapper {
-width: 100%;
-height: calc(100% - 4px); 
-overflow: hidden; 
-position: relative;
+    width: 100%;
+    /* flex grows to use remaining vertical space */
+    flex: 1 1 auto;
+    overflow: hidden;
+    position: relative;
+    margin-top: 8px;
 }
 
-
+/* Main letter text — responsive, readable, centered text */
 #letterText {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     white-space: pre-wrap;
-    line-height: 1.75;
+    line-height: clamp(1.45, 4.4vw, 1.95);
 
     color: #3a2f28;
-    font-size: 1rem;
+    font-size: clamp(16px, 4.2vw, 22px);     /* bigger on mobile, scales down on desktop */
     font-family: 'Cormorant', serif;
     font-style: italic;
 
-    text-align: center; /* full centering */
+    text-align: center;
 
-    text-shadow: 0 0 4px rgba(255, 255, 255, 0.55);
+    /* soften glow so the text reads well on textured backgrounds */
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.55);
 
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 8px 12px; /* comfortable padding for the text area */
 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* hide native scrollbar on Firefox but still allow scrolling */
+    scrollbar-width: thin;
+    -ms-overflow-style: auto;
 }
 
-
-
+/* Hide the scrollbar for WebKit while keeping scroll functionality */
 #letterText::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    width: 8px;
+}
+#letterText::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(0,0,0,0.15);
 }
 
+/* Small screens adjustments */
+@media (max-width: 480px) {
+    #letterCard {
+        width: 96vw;
+        max-width: 540px;
+        padding: 6vw 5vw 10vw 5vw;
+        border-radius: 10px;
+        min-height: 70vh;
+    }
+
+    #letterCard h2 {
+        font-size: clamp(20px, 7.2vw, 40px);
+    }
+
+    #letterText {
+        font-size: clamp(18px, 5.4vw, 24px);
+        line-height: clamp(1.6, 6.0vw, 2.1);
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    #letterCard::after {
+        font-size: clamp(12px, 3.8vw, 14px);
+    }
+}
+
+/* Larger desktop tweaks */
+@media (min-width: 1200px) {
+    #letterCard {
+        max-width: 860px;
+        min-height: 66vh;
+    }
+    #letterText { font-size: 18px; }
+}
