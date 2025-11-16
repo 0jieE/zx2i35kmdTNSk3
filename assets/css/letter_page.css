@@ -4,7 +4,7 @@ body {
     font-family: "Poppins", sans-serif;
 
     /* Background image */
-    background-image: url("/assets/envelope_bg.jpg");
+    background-image: url("assets/envelope_bg.jpg");
     background-size: cover;          /* fills screen */
     background-position: center;     /* centers on all devices */
     background-repeat: no-repeat;    /* no repeat */
