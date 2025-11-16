@@ -4,7 +4,7 @@ body {
     font-family: "Poppins", sans-serif;
 
     /* Background image */
-    background-image: url("../envelope_bg.jpg");
+    background-image: url("assets/envelope_bg.jpg");
     background-size: cover;          /* fills screen */
     background-position: center;     /* centers on all devices */
     background-repeat: no-repeat;    /* no repeat */
@@ -27,27 +27,3 @@ body {
     0%{ transform:translateY(100vh) scale(1); opacity:0.95; }
     100%{ transform:translateY(-25vh) scale(1.2); opacity:0; }
   }
-
-/* ——————————————————————————————
-   FIX TINY LETTER ON MOBILE
-   Make the letter card full width on small screens
-—————————————————————————————— */
-@media (max-width: 600px) {
-
-    #letterCard {
-        width: 95vw !important;
-        max-width: none !important;
-        transform: translate(-50%, -50%) scale(1.35) !important;
-        padding: 14vw 8vw 18vw 8vw !important;
-    }
-
-    #letterCard h2 {
-        font-size: 6vw !important;
-    }
-
-    #letterText {
-        font-size: 4.5vw !important;
-        line-height: 6.4vw !important;
-    }
-}
-
