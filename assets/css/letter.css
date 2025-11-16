@@ -4,11 +4,11 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
 
-    width: 88vw;               /* fits mobile width */
-    max-width: 380px;          /* looks nice on desktop */
-    aspect-ratio: 3 / 4.5;     /* perfect shape for your letter_bg */
+    width: 95vw;               /* bigger on mobile */
+    max-width: 460px;          /* slightly larger on desktop */
+    aspect-ratio: 3 / 4.4;     /* better ratio for your letter */
 
-    padding: 12vw 6vw 14vw 6vw; /* responsive safe text area */
+    padding: 10vw 6vw 14vw 6vw;
 
     background-image:
         url("../letter_bg.jpg"),
@@ -27,7 +27,22 @@
     overflow: hidden;
 }
 
+@media (max-width: 480px) {
+    #letterCard {
+        width: 96vw;
+        padding: 12vw 7vw 16vw 7vw;
+        border-radius: 10px;
+    }
 
+    #letterCard h2 {
+        font-size: 6.5vw;
+    }
+
+    #letterText {
+        font-size: 4.4vw;
+        line-height: 6vw;
+    }
+}
 
 #letterCard h2 {
     margin-top: 10px;
