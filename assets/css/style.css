@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f7e9ff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Letter container */
+.container {
+    max-width: 600px;
+    margin: 150px auto 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    opacity: 0; /* initially hidden */
+    transition: opacity 2s ease-in-out;
+}
+
+/* Balloons */
+.balloon {
+    position: fixed;
+    bottom: -150px;
+    width: 80px;
+    opacity: 0.9;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(-130vh); opacity: 0; }
+}
+
+/* Fireworks video */
+#fireworksVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+}

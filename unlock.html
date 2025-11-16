@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Enter Code</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: #fce8ff;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .container {
+        width: 90%;
+        max-width: 420px;
+        background: white;
+        padding: 25px 20px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    h2 {
+        color: #c7378b;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 2px solid #ffb3e6;
+        outline: none;
+        font-size: 1rem;
+        text-align: center;
+        transition: 0.2s ease;
+    }
+    input:focus { border-color: #ff4db1; }
+    button {
+        width: 100%;
+        padding: 14px;
+        background: #ff74c6;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: 0.2s ease;
+    }
+    button:active { scale: 0.97; opacity: 0.9; }
+    .error {
+        margin-top: 14px;
+        color: red;
+        font-size: 0.95rem;
+        height: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Enter the 9-digit code from the card</h2>
+    <input type="text" id="code" placeholder="Enter code here">
+    <button onclick="checkCode()">Unlock</button>
+    <p id="error" class="error"></p>
+</div>
+
+<script>
+function checkCode() {
+    const input = document.getElementById("code").value.trim();
+
+    // Correct SHA-256 hash of "@Genove17"
+    const correctHash = "dd17453cecc1f04dc45f10939fb5b530e5f7f18f240e92e33ae88bd41ac3374c";
+
+    // Hash the input using SubtleCrypto (built into the browser)
+    async function verify() {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input);
+
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray
+            .map(b => b.toString(16).padStart(2, "0"))
+            .join("");
+
+        if (hashHex === correctHash) {
+            sessionStorage.setItem("unlockHash", correctHash);
+            window.location.href = "letter.html";
+        } else {
+            document.getElementById("error").textContent = "Incorrect code.";
+        }
+    }
+
+    verify();
+}
+</script>
+
+</body>
+</html>

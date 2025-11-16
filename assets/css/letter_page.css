@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+
+    /* Background image */
+    background-image: url("/assets/envelope_bg.jpg");
+    background-size: cover;          /* fills screen */
+    background-position: center;     /* centers on all devices */
+    background-repeat: no-repeat;    /* no repeat */
+    background-attachment: fixed;    /* NICE effect on desktop */
+    
+    overflow: hidden;
+}
+
+  /* Floating balloons */
+  .floating{
+    position:fixed;
+    width:80px;
+    user-select:none;
+    pointer-events:none;
+    animation:floatUp linear infinite;
+    z-index:1;
+  }
+
+  @keyframes floatUp{
+    0%{ transform:translateY(100vh) scale(1); opacity:0.95; }
+    100%{ transform:translateY(-25vh) scale(1.2); opacity:0; }
+  }

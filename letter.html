@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<script>
+    (async () => {
+        // SAME HASH USED IN unlock.html
+        const correctHash = "dd17453cecc1f04dc45f10939fb5b530e5f7f18f240e92e33ae88bd41ac3374c";
+
+        // Read stored hash from previous page
+        const stored = sessionStorage.getItem("unlockHash");
+
+        if (!stored) {
+            // No code entered → block access
+            window.location.href = "unlock.html";
+            return;
+        }
+
+        if (stored !== correctHash) {
+            // Someone put fake data → block
+            window.location.href = "unlock.html";
+            return;
+        }
+
+        // If correct → allow page to load
+    })();
+</script>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Birthday Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/letter.css">
+<link rel="stylesheet" href="assets/css/letter_page.css">
+<link rel="stylesheet" href="assets/css/envelope.css">
+</head>
+<body>
+
+<!-- Balloon container -->
+<div id="floatingContainer"></div>
+
+<!-- Envelope -->
+<div id="envelopeContainer">
+  <div id="envelope">
+    <div id="flap">
+      <span id="flapText">Slide up to open</span>
+    </div>
+    <div id="envelopeBody"></div>
+  </div>
+</div>
+
+<div id="letterCard">
+  <h2>Happy Birthday!</h2>
+  <div id="letterScrollWrapper">
+    <div id="letterText"></div>
+  </div>
+</div>
+
+<!-- Music (LOCAL FILE ONLY) -->
+<audio id="music" src="assets/birthday.mp3" loop></audio>
+<script src="assets/js/letter.js"></script>
+</body>
+</html>
