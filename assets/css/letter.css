@@ -5,7 +5,7 @@
     transform: translate(-50%, -50%) scale(1);
 
     width: 95vw;               /* bigger on mobile */
-    max-width: 460px;          /* slightly larger on desktop */
+    max-width: 760px;          /* slightly larger on desktop */
     aspect-ratio: 3 / 4.4;     /* better ratio for your letter */
 
     padding: 10vw 6vw 14vw 6vw;
